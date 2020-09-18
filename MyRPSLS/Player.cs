@@ -9,22 +9,24 @@ namespace MyRPSLS
     abstract class Player
     {
         // member variables (HAS A)
-            // name
-            // list of gestures
+
+        public string name;
+        public List<Gestures> gestures;
 
         // constructor (SPAWN)
-        public Player(string name) // Human constructor
+        public Player()
         {
-            // choose name
-            // instantiate list of gesture objects
-            // add gestures to list
-        }
-
-        public Player() // AI constructor
-        {
-            // hard-coded name
-            // instantiate list of gesture objects
-            // add gestures to list
+            gestures = new List<Gestures>();
+            Rock Rock = new Rock();
+            Paper Paper = new Paper();
+            Scissors Scissors = new Scissors();
+            Lizard Lizard = new Lizard();
+            Spock Spock = new Spock();
+            gestures.Add(Rock); // add gestures to list
+            gestures.Add(Paper);
+            gestures.Add(Scissors);
+            gestures.Add(Lizard);
+            gestures.Add(Spock);
         }
 
         // member methods (CAN DO)

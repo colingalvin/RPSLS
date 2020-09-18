@@ -12,6 +12,11 @@ namespace MyRPSLS
         // member variables (HAS A)
 
         // constructor (SPAWN)
+        public AI()
+            : base() // Instantiate list of gestures and gesture objects
+        {
+            name = "HAL9000";
+        }
 
         // member methods (CAN DO)
 

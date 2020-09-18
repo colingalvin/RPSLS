@@ -37,13 +37,14 @@ namespace MyRPSLS
             Console.WriteLine("Wecome to Rock/Paper/Scissors/Lizard/Spock!\n"); // Welcome message
             Console.WriteLine("The rules for the game are simple:"); // Display rules
             Console.WriteLine("  Rock crushes Scissors\n  Scissors cuts Paper\n  Paper covers Rock\n  Rock crushes Lizard\n  Lizard poisons Spock\n  Spock smashes Scissors\n  Scissors decapitates Lizard\n  Lizard eats Paper\n  Paper disproved Spock\n  Spock vaporizes Rock");
-            Console.WriteLine("\n...simple, right? Don't worry, we'll help you out during the game.\n");
+            Console.WriteLine("\n...simple, right? Don't worry, we'll help you out during the game!\n");
         }
 
         public static string ChoosePlayers()
         {
-            Console.Write("Type 1 for single-player (v Computer) or 2 for multi-player (v Human): "); // Choose single or multi-player, # of rounds
+            Console.Write("Type 1 for single-player (Human v Computer) or 2 for multi-player (Human v Human): "); // Choose single or multi-player, # of rounds
             string userInput = Console.ReadLine();
+            Console.WriteLine(); // Spacing
             return userInput;
         }
 
@@ -51,6 +52,7 @@ namespace MyRPSLS
         {
             Console.Write("Enter number of rounds (best of): ");
             string userInput = Console.ReadLine();
+            Console.WriteLine(); // Spacing
             return userInput;
         }
 
