@@ -11,7 +11,7 @@ namespace MyRPSLS
         // member variables
         Player playerOne;
         Player playerTwo;
-        int numberOfRounds;
+        double numberOfRounds;
 
         // constructor
         public GamePlay(string numberOfPlayers, string numberOfRounds)
@@ -27,7 +27,7 @@ namespace MyRPSLS
                     playerTwo = new Human();
                     break;
             }
-            this.numberOfRounds = int.Parse(numberOfRounds);
+            this.numberOfRounds = double.Parse(numberOfRounds);
         }
 
         // member methods
@@ -59,21 +59,23 @@ namespace MyRPSLS
         public void PlayGame()
         {
             // while either player score < (# rounds/2)
-
-            DisplayScoreboard(); // Display scoreboard
-            playerOne.DisplayGestures(); 
-            Console.Write($"{playerOne.name}, make your choice! "); // Player one chooses gesture from list
-            string playerOneChoice = Console.ReadLine(); // Capture choice as string
-            Gestures playerOneGesture = playerOne.ChooseGesture(playerOneChoice); // Pass string in to return Gesture object
+            while(playerOne.score < (numberOfRounds/2) && playerTwo.score < (numberOfRounds / 2))
+            {
+                DisplayScoreboard(); // Display scoreboard
+                playerOne.DisplayGestures(); 
+                Console.Write($"{playerOne.name}, make your choice! "); // Player one chooses gesture from list
+                string playerOneChoice = Console.ReadLine(); // Capture choice as string
+                Gestures playerOneGesture = playerOne.ChooseGesture(playerOneChoice); // Pass string in to return Gesture object
             
-            DisplayScoreboard(); // Clears console so that player two cannot see player 1 choice
-            playerTwo.DisplayGestures();
-            Console.Write($"{playerTwo.name}, make your choice! "); // Player one chooses gesture from list
-            string playerTwoChoice = Console.ReadLine(); // Capture choice as string
-            Gestures playerTwoGesture = playerTwo.ChooseGesture(playerTwoChoice); // Pass string in to return Gesture object
+                DisplayScoreboard(); // Clears console so that player two cannot see player 1 choice
+                playerTwo.DisplayGestures();
+                Console.Write($"{playerTwo.name}, make your choice! "); // Player one chooses gesture from list
+                string playerTwoChoice = Console.ReadLine(); // Capture choice as string
+                Gestures playerTwoGesture = playerTwo.ChooseGesture(playerTwoChoice); // Pass string in to return Gesture object
 
-            // Compare gestures
-            // Display round winner
+                CompareGestures(playerOneGesture, playerTwoGesture); // Compare Gestures, display round winner
+            }
+            EndGame();
         }
 
         public void DisplayScoreboard()
@@ -84,16 +86,90 @@ namespace MyRPSLS
             Console.WriteLine($"{playerOne.name}: {playerOne.score}    {playerTwo.name}: {playerTwo.score}    Best of: {numberOfRounds} \n");
         }
 
-            // CompareGestures(player1Gesture, player2Gesture)
-                // int result = compare play1gesture.canBeat___.CompareTo(player2gesture.canBeat____
-                    // result of 1 = player 1 wins
-                    // result of -1 = player 2 wins
-                    // result of 0 = players tie
+        public void CompareGestures(Gestures playerOneGesture, Gestures playerTwoGesture)
+        {
+            Console.WriteLine($"{playerOne.name} chose {playerOneGesture.name}, {playerTwo.name} chose {playerTwoGesture.name}\n");
 
-            // DisplayRoundWinner(player1Gesture, player2Gesture, int roundResult)
-                // int captured from comparing bool values of each gesture
-                // display winning gesture
-                // display player who choose winning gesture
-                // increase player score
+            if (playerOneGesture.name == playerTwoGesture.name) // If gestures equal, declare a tie
+            {
+                Console.WriteLine("Tie round!");
+                Console.Write("Press enter to continue.");
+                Console.ReadLine();
+                return;
+            }
+            else // If gestures unequal
+            {
+                switch (playerOneGesture.name)
+                {
+                    case "Rock":
+                        if(playerTwoGesture.canBeatRock)
+                        {
+                            DisplayRoundWinner(playerTwoGesture, playerOneGesture, playerTwo);
+                        }
+                        else
+                        {
+                            DisplayRoundWinner(playerOneGesture, playerTwoGesture, playerOne);
+                        }
+                        break;
+                    case "Paper":
+                        if (playerTwoGesture.canBeatPaper)
+                        {
+                            DisplayRoundWinner(playerTwoGesture, playerOneGesture, playerTwo);
+                        }
+                        else
+                        {
+                            DisplayRoundWinner(playerOneGesture, playerTwoGesture, playerOne);
+                        }
+                        break;
+                    case "Scissors":
+                        if (playerTwoGesture.canBeatScissors)
+                        {
+                            DisplayRoundWinner(playerTwoGesture, playerOneGesture, playerTwo);
+                        }
+                        else
+                        {
+                            DisplayRoundWinner(playerOneGesture, playerTwoGesture, playerOne);
+                        }
+                        break;
+                    case "Lizard":
+                        if (playerTwoGesture.canBeatLizard)
+                        {
+                            DisplayRoundWinner(playerTwoGesture, playerOneGesture, playerTwo);
+                        }
+                        else
+                        {
+                            DisplayRoundWinner(playerOneGesture, playerTwoGesture, playerOne);
+                        }
+                        break;
+                    case "Spock":
+                        if (playerTwoGesture.canBeatSpock)
+                        {
+                            DisplayRoundWinner(playerTwoGesture, playerOneGesture, playerTwo);
+                        }
+                        else
+                        {
+                            DisplayRoundWinner(playerOneGesture, playerTwoGesture, playerOne);
+                        }
+                        break;
+                }
+                Console.Write("Press enter to continue.");
+                Console.ReadLine();
+                return;
+            }
+        }
+
+        public void DisplayRoundWinner(Gestures winningGesture, Gestures losingGesture, Player winner)
+        {
+            Console.WriteLine($"{winningGesture.name} beats {losingGesture.name}, {winner.name} wins this round!");
+            winner.score++;
+        }
+
+        public void EndGame()
+        {
+            Console.Clear();
+            Console.WriteLine("\nThe game is over! Final points:\n");
+            Console.WriteLine($"{playerOne.name}: {playerOne.score}; {playerTwo.name}: {playerTwo.score}.");
+            Console.ReadLine();
+        }
     }
 }
