@@ -20,7 +20,5 @@ namespace MyRPSLS
         // constructor (SPAWN)
 
         // member methods (CAN DO)
-            // display gesture
-            // compare/determine winner
     }
 }

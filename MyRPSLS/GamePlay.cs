@@ -56,17 +56,33 @@ namespace MyRPSLS
             return userInput;
         }
 
+        public void PlayGame()
+        {
+            // while either player score < (# rounds/2)
 
-            // PlayGame
-                // while either player score < (# rounds/2)
-                    // Display scoreboard
-                    // Trigger players to choose gesture
-                    // Compare gestures, capture int result
-                    // Display round winner
+            DisplayScoreboard(); // Display scoreboard
+            playerOne.DisplayGestures(); 
+            Console.Write($"{playerOne.name}, make your choice! "); // Player one chooses gesture from list
+            string playerOneChoice = Console.ReadLine(); // Capture choice as string
+            Gestures playerOneGesture = playerOne.ChooseGesture(playerOneChoice); // Pass string in to return Gesture object
+            
+            DisplayScoreboard(); // Clears console so that player two cannot see player 1 choice
+            playerTwo.DisplayGestures();
+            Console.Write($"{playerTwo.name}, make your choice! "); // Player one chooses gesture from list
+            string playerTwoChoice = Console.ReadLine(); // Capture choice as string
+            Gestures playerTwoGesture = playerTwo.ChooseGesture(playerTwoChoice); // Pass string in to return Gesture object
 
-            // DisplayScoreboard
+            // Compare gestures
+            // Display round winner
+        }
+
+        public void DisplayScoreboard()
+        {
+            Console.Clear();
                 // display current score of all players
                 // display "Best of: " to keep track of rounds needed to play
+            Console.WriteLine($"{playerOne.name}: {playerOne.score}    {playerTwo.name}: {playerTwo.score}    Best of: {numberOfRounds} \n");
+        }
 
             // CompareGestures(player1Gesture, player2Gesture)
                 // int result = compare play1gesture.canBeat___.CompareTo(player2gesture.canBeat____
