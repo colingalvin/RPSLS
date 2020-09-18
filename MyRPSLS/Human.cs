@@ -21,10 +21,28 @@ namespace MyRPSLS
 
         // member methods (CAN DO)
 
-            // override ChooseGestures()
-                // display list of gestures
-                // user choose
-                // clear console so 2nd player cannot see choice
-                // return chosen gesture
+        public override Gestures ChooseGesture(string userInput)
+        {
+            Gestures gesture = null;
+            switch (userInput)
+            {
+                case "1":
+                    gesture = gestures[0];
+                    break;
+                case "2":
+                    gesture = gestures[1];
+                    break;
+                case "3":
+                    gesture = gestures[2];
+                    break;
+                case "4":
+                    gesture = gestures[3];
+                    break;
+                case "5":
+                    gesture = gestures[4];
+                    break;
+            }
+            return gesture;
+        }
     }
 }

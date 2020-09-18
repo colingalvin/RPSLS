@@ -75,7 +75,6 @@ namespace MyRPSLS
 
                 CompareGestures(playerOneGesture, playerTwoGesture); // Compare Gestures, display round winner
             }
-            EndGame();
         }
 
         public void DisplayScoreboard()
@@ -167,8 +166,16 @@ namespace MyRPSLS
         public void EndGame()
         {
             Console.Clear();
-            Console.WriteLine("\nThe game is over! Final points:\n");
-            Console.WriteLine($"{playerOne.name}: {playerOne.score}; {playerTwo.name}: {playerTwo.score}.");
+            Console.WriteLine("The game is over! Final points:\n");
+            Console.WriteLine($"{playerOne.name}: {playerOne.score}; {playerTwo.name}: {playerTwo.score}.\n");
+            if(playerOne.score > playerTwo.score)
+            {
+                Console.WriteLine($"{playerOne.name} wins!");
+            }
+            else
+            {
+                Console.WriteLine($"{playerTwo.name} wins!");
+            }
             Console.ReadLine();
         }
     }

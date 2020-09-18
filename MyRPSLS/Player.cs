@@ -36,7 +36,7 @@ namespace MyRPSLS
         public void DisplayGestures() // Display available gestures
         {
             int i = 1;
-            foreach(Gestures gesture in gestures)
+            foreach (Gestures gesture in gestures)
             {
                 Console.WriteLine($"  Type {i} for {gesture.name}");
                 i++;
@@ -44,29 +44,7 @@ namespace MyRPSLS
             Console.WriteLine();
         }
 
-        public Gestures ChooseGesture(string userInput)
-        {
-            Gestures gesture = null;
-            switch(userInput)
-            {
-                case "1":
-                    gesture = gestures[0];
-                    break;
-                case "2":
-                    gesture = gestures[1];
-                    break;
-                case "3":
-                    gesture = gestures[2];
-                    break;
-                case "4":
-                    gesture = gestures[3];
-                    break;
-                case "5":
-                    gesture = gestures[4];
-                    break;
-            }
-            return gesture;
-        }
+        public abstract Gestures ChooseGesture(string userInput);
             // display gestures
             // abstract ChooseGesture
     }

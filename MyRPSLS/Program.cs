@@ -15,7 +15,7 @@ namespace MyRPSLS
             string numberOfRounds = GamePlay.ChooseRounds(); // Choose # of rounds (best of)
             GamePlay game = new GamePlay(numberOfPlayers, numberOfRounds); // Construct appropriate game (constructor triggered by choice above)
             game.PlayGame();
-            // Begin!
+            game.EndGame();
         }
     }
 }
