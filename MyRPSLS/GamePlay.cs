@@ -9,22 +9,51 @@ namespace MyRPSLS
     class GamePlay
     {
         // member variables
+        Player playerOne;
+        Player playerTwo;
+        int numberOfRounds;
 
         // constructor
-        public GamePlay() // Single player
+        public GamePlay(string numberOfPlayers, string numberOfRounds)
         {
-            // create new human
-            // create new AI
-            // # of rounds
+            switch(numberOfPlayers)
+            {
+                case "1": // Single player
+                    playerOne = new Human();
+                    playerTwo = new AI();
+                    break;
+                case "2": // Multi-player
+                    playerOne = new Human();
+                    playerTwo = new Human();
+                    break;
+            }
+            this.numberOfRounds = int.Parse(numberOfRounds);
         }
 
         // member methods
 
-            // DisplayWelcomeScreen
-                // Welcome message
-                // Display rules
-                // Choose single or multi-player, # of rounds
-                    // trigger appropriate constructor
+        public static void DisplayWelcomeScreen()
+        {
+            Console.WriteLine("Wecome to Rock/Paper/Scissors/Lizard/Spock!\n"); // Welcome message
+            Console.WriteLine("The rules for the game are simple:"); // Display rules
+            Console.WriteLine("  Rock crushes Scissors\n  Scissors cuts Paper\n  Paper covers Rock\n  Rock crushes Lizard\n  Lizard poisons Spock\n  Spock smashes Scissors\n  Scissors decapitates Lizard\n  Lizard eats Paper\n  Paper disproved Spock\n  Spock vaporizes Rock");
+            Console.WriteLine("\n...simple, right? Don't worry, we'll help you out during the game.\n");
+        }
+
+        public static string ChoosePlayers()
+        {
+            Console.Write("Type 1 for single-player (v Computer) or 2 for multi-player (v Human): "); // Choose single or multi-player, # of rounds
+            string userInput = Console.ReadLine();
+            return userInput;
+        }
+
+        public static string ChooseRounds()
+        {
+            Console.Write("Enter number of rounds (best of): ");
+            string userInput = Console.ReadLine();
+            return userInput;
+        }
+
 
             // PlayGame
                 // while either player score < (# rounds/2)
