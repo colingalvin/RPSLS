@@ -44,16 +44,18 @@ namespace MyRPSLS
         {
             Console.Write("Type 1 for single-player (Human v Computer) or 2 for multi-player (Human v Human): "); // Choose single or multi-player, # of rounds
             string userInput = Console.ReadLine();
+            string verifiedUserInput = Verification.VerifyChoiceWithinRange(userInput, 1, 2);
             Console.WriteLine(); // Spacing
-            return userInput;
+            return verifiedUserInput;
         }
 
         public static string ChooseRounds()
         {
             Console.Write("Enter number of rounds (best of): ");
             string userInput = Console.ReadLine();
+            string verifiedUserInput = Verification.VerifyOddNumber(userInput);
             Console.WriteLine(); // Spacing
-            return userInput;
+            return verifiedUserInput;
         }
 
         public void PlayGame()
@@ -65,13 +67,15 @@ namespace MyRPSLS
                 playerOne.DisplayGestures(); 
                 Console.Write($"{playerOne.name}, make your choice! "); // Player one chooses gesture from list
                 string playerOneChoice = Console.ReadLine(); // Capture choice as string
-                Gestures playerOneGesture = playerOne.ChooseGesture(playerOneChoice); // Pass string in to return Gesture object
+                string verifiedPlayerOneChoice = Verification.VerifyChoiceWithinRange(playerOneChoice, 1, 5);
+                Gestures playerOneGesture = playerOne.ChooseGesture(verifiedPlayerOneChoice); // Pass string in to return Gesture object
             
                 DisplayScoreboard(); // Clears console so that player two cannot see player 1 choice
                 playerTwo.DisplayGestures();
                 Console.Write($"{playerTwo.name}, make your choice! "); // Player one chooses gesture from list
                 string playerTwoChoice = Console.ReadLine(); // Capture choice as string
-                Gestures playerTwoGesture = playerTwo.ChooseGesture(playerTwoChoice); // Pass string in to return Gesture object
+                string verifiedPlayerTwoChoice = Verification.VerifyChoiceWithinRange(playerTwoChoice, 1, 5);
+                Gestures playerTwoGesture = playerTwo.ChooseGesture(verifiedPlayerTwoChoice); // Pass string in to return Gesture object
 
                 CompareGestures(playerOneGesture, playerTwoGesture); // Compare Gestures, display round winner
             }
@@ -159,7 +163,64 @@ namespace MyRPSLS
 
         public void DisplayRoundWinner(Gestures winningGesture, Gestures losingGesture, Player winner)
         {
-            Console.WriteLine($"{winningGesture.name} beats {losingGesture.name}, {winner.name} wins this round!");
+            string verb = "";
+            switch(winningGesture.name)
+            {
+                case "Rock":
+                    switch(losingGesture.name)
+                    {
+                        default:
+                            verb = "crushes";
+                            break;
+                    }
+                    break;
+                case "Paper":
+                    switch(losingGesture.name)
+                    {
+                        case "Rock":
+                            verb = "covers";
+                            break;
+                        case "Spock":
+                            verb = "disproves";
+                            break;
+                    }
+                    break;
+                case "Scissors":
+                    switch(losingGesture.name)
+                    {
+                        case "Paper":
+                            verb = "cuts";
+                            break;
+                        case "Lizard":
+                            verb = "decapitates";
+                            break;
+                    }
+                    break;
+                case "Lizard":
+                    switch(losingGesture.name)
+                    {
+                        case "Spock":
+                            verb = "poisons";
+                            break;
+                        case "Paper":
+                            verb = "eats";
+                            break;
+                    }
+                    break;
+                case "Spock":
+                    switch(losingGesture.name)
+                    {
+                        case "Scissors":
+                            verb = "smashes";
+                            break;
+                        case "Rock":
+                            verb = "vaporizes";
+                            break;
+                    }
+                    break;
+            }
+            // add veribage for what winning gesture does to losing gesture
+            Console.WriteLine($"{winningGesture.name} {verb} {losingGesture.name}, {winner.name} wins this round!");
             winner.score++;
         }
 

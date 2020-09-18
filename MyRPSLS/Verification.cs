@@ -9,22 +9,52 @@ namespace MyRPSLS
     class Verification
     {
         // member variables
-            // verifiedUserInput
+        // verifiedUserInput
 
         // constructor
 
         // member methods
-            // VerifyUserInput(userInput, start, end)
-                // take in user input
-                // while
-                    // verify that it can be parsed as int, if not reprompt
-                    // verify between start and end parameters (end parameter customizable for length of list of gestures)
-                // return verifiedUserInput
-            
-            // VerifyOddNumber(userInput)
-                // take in user input
-                // while user input % 2 = 0
-                    // best of games must have an odd number of rounds - try again
-                // return verified user input
+        public static string VerifyChoiceWithinRange(string userInput, int start, int end) // Verify user input is within appropriate bounds
+        {
+            int userInputInteger; // stores successfully parsed input
+            string validatedInput; // stores successfully verified input
+
+            bool isInteger = int.TryParse(userInput, out userInputInteger);
+            // Input must be integer between start and end values of switch case before exiting while loop
+            while (isInteger != true || userInputInteger < start || userInputInteger > end)
+            {
+                Console.Write("Invalid choice. Please try again: ");
+                userInput = Console.ReadLine();
+                isInteger = int.TryParse(userInput, out userInputInteger);
+            }
+            validatedInput = Convert.ToString(userInputInteger);
+            return validatedInput;
+        }
+
+        public static string VerifyOddNumber(string userInput) // Verify user input is an odd number
+        {
+            int userInputInteger; // stores successfully parsed input
+            string validatedInput; // stores successfully verified input
+
+            bool isInteger = int.TryParse(userInput, out userInputInteger);
+            bool isOdd = false;
+            if(userInputInteger % 2 != 0)
+            {
+                isOdd = true;
+            }
+            // Input must be integer between start and end values of switch case before exiting while loop
+            while (isInteger != true || isOdd != true)
+            {
+                Console.Write("Invalid choice - number must be odd. Please try again: ");
+                userInput = Console.ReadLine();
+                isInteger = int.TryParse(userInput, out userInputInteger);
+                if (userInputInteger % 2 != 0)
+                {
+                    isOdd = true;
+                }
+            }
+            validatedInput = Convert.ToString(userInputInteger);
+            return validatedInput;
+        }
     }
 }

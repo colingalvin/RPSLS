@@ -33,6 +33,7 @@ namespace MyRPSLS
 
         // member methods (CAN DO)
 
+        // make abstract so that AI does not display choices
         public void DisplayGestures() // Display available gestures
         {
             int i = 1;

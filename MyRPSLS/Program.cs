@@ -12,8 +12,10 @@ namespace MyRPSLS
         {
             GamePlay.DisplayWelcomeScreen(); // Welcome screen, display rules
             string numberOfPlayers = GamePlay.ChoosePlayers(); // choose single (Human v AI) or multi-player (Human v Human)
+            string verifiedNumberOfPlayers =  Verification.VerifyChoiceWithinRange(numberOfPlayers, 1, 2);
             string numberOfRounds = GamePlay.ChooseRounds(); // Choose # of rounds (best of)
-            GamePlay game = new GamePlay(numberOfPlayers, numberOfRounds); // Construct appropriate game (constructor triggered by choice above)
+            string verifiedNumberOfRounds = Verification.VerifyOddNumber(numberOfRounds);
+            GamePlay game = new GamePlay(verifiedNumberOfPlayers, verifiedNumberOfRounds); // Construct appropriate game (constructor triggered by choice above)
             game.PlayGame();
             game.EndGame();
         }

@@ -12,7 +12,7 @@ namespace MyRPSLS
 
         public string name;
         public bool canBeatRock;
-        public bool  canBeatPaper;
+        public bool canBeatPaper;
         public bool canBeatScissors;
         public bool canBeatLizard;
         public bool canBeatSpock;
