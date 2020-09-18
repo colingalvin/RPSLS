@@ -9,9 +9,13 @@ namespace MyRPSLS
     abstract class Gestures
     {
         // member variables (HAS A)
-        
-            // name
-            // bool values - canBeat____
+
+        public string name;
+        public bool canBeatRock;
+        public bool canBeatPaper;
+        public bool canBeatScissors;
+        public bool canBeatLizard;
+        public bool canBeatSpock;
 
         // constructor (SPAWN)
 

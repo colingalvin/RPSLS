@@ -11,8 +11,15 @@ namespace MyRPSLS
         // member variables (HAS A)
 
         // constructor (SPAWN)
-            // name = Lizard
-            // correct boolean values for what it can and cannot beat
+        public Lizard()
+        {
+            name = "Lizard";
+            canBeatRock = false;
+            canBeatPaper = true;
+            canBeatScissors = false;
+            canBeatLizard = false;
+            canBeatSpock = true;
+        }
 
         // member methods (CAN DO)
     }
