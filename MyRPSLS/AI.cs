@@ -20,13 +20,11 @@ namespace MyRPSLS
 
         // member methods (CAN DO)
 
-        public override Gestures ChooseGesture(string userInput)
+        public override Gestures ChooseGesture(string userInput) // AI generates random choice 
         {
             Random random = new Random();
-            int randomChoice = random.Next(0, 4);
-            // randomly choose from list of gestures (#0-4)
-            // return chosen gesture
-            return gestures[randomChoice];
+            int randomChoice = random.Next(0, (gestures.Count-1)); // dynamic for number of gestures to choose from
+            return gestures[randomChoice]; // returns randomly-chosen gesture
         }
     }
 }

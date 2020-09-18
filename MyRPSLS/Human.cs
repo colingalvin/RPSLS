@@ -12,14 +12,25 @@ namespace MyRPSLS
         // member variables (HAS A)
 
         // constructor (SPAWN)
-        public Human()
+        public Human(string playerNumber)
             : base()  // Instantiate list of gestures and gesture objects
         {
-            Console.Write("Please enter the name for Player One: \n");
+            Console.Write($"Please enter the name for {playerNumber}: \n");
             name = Console.ReadLine();
         }
 
         // member methods (CAN DO)
+
+        public override void DisplayGestures() // Display available gestures
+        {
+            int i = 1;
+            foreach (Gestures gesture in gestures)
+            {
+                Console.WriteLine($"  Type {i} for {gesture.name}");
+                i++;
+            }
+            Console.WriteLine();
+        }
 
         public override Gestures ChooseGesture(string userInput)
         {

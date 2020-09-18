@@ -19,12 +19,12 @@ namespace MyRPSLS
             switch(numberOfPlayers)
             {
                 case "1": // Single player
-                    playerOne = new Human();
+                    playerOne = new Human("Player One");
                     playerTwo = new AI();
                     break;
                 case "2": // Multi-player
-                    playerOne = new Human();
-                    playerTwo = new Human();
+                    playerOne = new Human("Player One");
+                    playerTwo = new Human("Player Two");
                     break;
             }
             this.numberOfRounds = double.Parse(numberOfRounds);
@@ -72,12 +72,20 @@ namespace MyRPSLS
             
                 DisplayScoreboard(); // Clears console so that player two cannot see player 1 choice
                 playerTwo.DisplayGestures();
-                Console.Write($"{playerTwo.name}, make your choice! "); // Player one chooses gesture from list
-                string playerTwoChoice = Console.ReadLine(); // Capture choice as string
-                string verifiedPlayerTwoChoice = Verification.VerifyChoiceWithinRange(playerTwoChoice, 1, 5);
-                Gestures playerTwoGesture = playerTwo.ChooseGesture(verifiedPlayerTwoChoice); // Pass string in to return Gesture object
+                if (playerTwo.name == "HAL9000")
+                {
+                    Gestures playerTwoGestureAI = playerTwo.ChooseGesture("");
+                    CompareGestures(playerOneGesture, playerTwoGestureAI);
+                }
+                else // If player is Human
+                {
+                    Console.Write($"{playerTwo.name}, make your choice! "); // Player one chooses gesture from list
+                    string playerTwoChoice = Console.ReadLine(); // Capture choice as string
+                    string verifiedPlayerTwoChoice = Verification.VerifyChoiceWithinRange(playerTwoChoice, 1, 5);
+                    Gestures playerTwoGesture = playerTwo.ChooseGesture(verifiedPlayerTwoChoice); // Pass string in to return Gesture object
 
-                CompareGestures(playerOneGesture, playerTwoGesture); // Compare Gestures, display round winner
+                    CompareGestures(playerOneGesture, playerTwoGesture); // Compare Gestures, display round winner
+                }
             }
         }
 

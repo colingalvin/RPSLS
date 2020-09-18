@@ -34,19 +34,9 @@ namespace MyRPSLS
         // member methods (CAN DO)
 
         // make abstract so that AI does not display choices
-        public void DisplayGestures() // Display available gestures
-        {
-            int i = 1;
-            foreach (Gestures gesture in gestures)
-            {
-                Console.WriteLine($"  Type {i} for {gesture.name}");
-                i++;
-            }
-            Console.WriteLine();
-        }
+        public virtual void DisplayGestures() // AI runs this, Human displays options
+        { }
 
         public abstract Gestures ChooseGesture(string userInput);
-            // display gestures
-            // abstract ChooseGesture
     }
 }
