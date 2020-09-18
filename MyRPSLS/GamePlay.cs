@@ -53,7 +53,7 @@ namespace MyRPSLS
         {
             Console.Write("Enter number of rounds (best of): ");
             string userInput = Console.ReadLine();
-            string verifiedUserInput = Verification.VerifyOddNumber(userInput);
+            string verifiedUserInput = Verification.VerifyPositveOddNumber(userInput);
             Console.WriteLine(); // Spacing
             return verifiedUserInput;
         }

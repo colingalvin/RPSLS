@@ -31,26 +31,26 @@ namespace MyRPSLS
             return validatedInput;
         }
 
-        public static string VerifyOddNumber(string userInput) // Verify user input is an odd number
+        public static string VerifyPositveOddNumber(string userInput) // Verify user input is a positive, o
         {
             int userInputInteger; // stores successfully parsed input
             string validatedInput; // stores successfully verified input
 
             bool isInteger = int.TryParse(userInput, out userInputInteger);
-            bool isOdd = false;
-            if(userInputInteger % 2 != 0)
+            bool isOddAndPositive = false;
+            if(userInputInteger % 2 != 0 && userInputInteger > 0)
             {
-                isOdd = true;
+                isOddAndPositive = true;
             }
             // Input must be integer between start and end values of switch case before exiting while loop
-            while (isInteger != true || isOdd != true)
+            while (isInteger != true || isOddAndPositive != true)
             {
-                Console.Write("Invalid choice - number must be odd. Please try again: ");
+                Console.Write("Invalid choice - number must be both odd and positive. Please try again: ");
                 userInput = Console.ReadLine();
                 isInteger = int.TryParse(userInput, out userInputInteger);
-                if (userInputInteger % 2 != 0)
+                if (userInputInteger % 2 != 0 && userInputInteger > 0)
                 {
-                    isOdd = true;
+                    isOddAndPositive = true;
                 }
             }
             validatedInput = Convert.ToString(userInputInteger);
