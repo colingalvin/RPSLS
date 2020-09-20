@@ -14,9 +14,14 @@ namespace MyRPSLS
         double numberOfRounds;
 
         // constructor
-        public GamePlay(string numberOfPlayers, string numberOfRounds)
+        public GamePlay()
         {
-            switch(numberOfPlayers)
+            DisplayWelcomeScreen();
+            string numberOfPlayers = ChoosePlayers(); // choose single (Human v AI) or multi-player (Human v Human)
+            string verifiedNumberOfPlayers = Verification.VerifyChoiceWithinRange(numberOfPlayers, 1, 2);
+            string numberOfRounds = ChooseRounds(); // Choose # of rounds (best of)
+            string verifiedNumberOfRounds = Verification.VerifyPositveOddNumber(numberOfRounds);
+            switch (verifiedNumberOfPlayers)
             {
                 case "1": // Single player
                     playerOne = new Human("Player One");
@@ -27,20 +32,20 @@ namespace MyRPSLS
                     playerTwo = new Human("Player Two");
                     break;
             }
-            this.numberOfRounds = double.Parse(numberOfRounds);
+            this.numberOfRounds = double.Parse(verifiedNumberOfRounds);
         }
 
         // member methods
 
-        public static void DisplayWelcomeScreen()
+        public void DisplayWelcomeScreen()
         {
             Console.WriteLine("Wecome to Rock/Paper/Scissors/Lizard/Spock!\n"); // Welcome message
             Console.WriteLine("The rules for the game are simple:"); // Display rules
-            Console.WriteLine("  Rock crushes Scissors\n  Scissors cuts Paper\n  Paper covers Rock\n  Rock crushes Lizard\n  Lizard poisons Spock\n  Spock smashes Scissors\n  Scissors decapitates Lizard\n  Lizard eats Paper\n  Paper disproved Spock\n  Spock vaporizes Rock");
+            Console.WriteLine("  Rock crushes Scissors\n  Scissors cuts Paper\n  Paper covers Rock\n  Rock crushes Lizard\n  Lizard poisons Spock\n  Spock smashes Scissors\n  Scissors decapitates Lizard\n  Lizard eats Paper\n  Paper disproves Spock\n  Spock vaporizes Rock");
             Console.WriteLine("\n...simple, right? Don't worry, we'll help you out during the game!\n");
         }
 
-        public static string ChoosePlayers()
+        public string ChoosePlayers()
         {
             Console.Write("Type 1 for single-player (Human v Computer) or 2 for multi-player (Human v Human): "); // Choose single or multi-player, # of rounds
             string userInput = Console.ReadLine();
@@ -49,7 +54,7 @@ namespace MyRPSLS
             return verifiedUserInput;
         }
 
-        public static string ChooseRounds()
+        public string ChooseRounds()
         {
             Console.Write("Enter number of rounds (best of): ");
             string userInput = Console.ReadLine();
@@ -72,12 +77,12 @@ namespace MyRPSLS
             
                 DisplayScoreboard(); // Clears console so that player two cannot see player 1 choice
                 playerTwo.DisplayGestures();
-                if (playerTwo.name == "HAL9000")
+                if (playerTwo.name == "HAL9000") // If player two is AI
                 {
                     Gestures playerTwoGestureAI = playerTwo.ChooseGesture("");
                     CompareGestures(playerOneGesture, playerTwoGestureAI);
                 }
-                else // If player is Human
+                else // If player two is Human
                 {
                     Console.Write($"{playerTwo.name}, make your choice! "); // Player one chooses gesture from list
                     string playerTwoChoice = Console.ReadLine(); // Capture choice as string

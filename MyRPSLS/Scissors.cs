@@ -20,8 +20,6 @@ namespace MyRPSLS
             canBeatLizard = true;
             canBeatSpock = false;
         }
-            // name = Scissors
-            // correct boolean values for what it can and cannot beat
 
         // member methods (CAN DO)
     }

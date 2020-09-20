@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,14 +32,14 @@ namespace MyRPSLS
             return validatedInput;
         }
 
-        public static string VerifyPositveOddNumber(string userInput) // Verify user input is a positive, o
+        public static string VerifyPositveOddNumber(string userInput)
         {
             int userInputInteger; // stores successfully parsed input
             string validatedInput; // stores successfully verified input
 
             bool isInteger = int.TryParse(userInput, out userInputInteger);
             bool isOddAndPositive = false;
-            if(userInputInteger % 2 != 0 && userInputInteger > 0)
+            if(userInputInteger % 2 != 0 && userInputInteger > 0) // number must be both odd and positive
             {
                 isOddAndPositive = true;
             }
@@ -56,5 +57,10 @@ namespace MyRPSLS
             validatedInput = Convert.ToString(userInputInteger);
             return validatedInput;
         }
+
+        // verify positive
+        // verify odd
+        // verify betwen range
+        // verify integer
     }
 }
