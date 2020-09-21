@@ -18,9 +18,9 @@ namespace MyRPSLS
         {
             DisplayWelcomeScreen();
             string numberOfPlayers = ChoosePlayers(); // choose single (Human v AI) or multi-player (Human v Human)
-            string verifiedNumberOfPlayers = Verification.VerifyChoiceWithinRange(numberOfPlayers, 1, 2);
+            string verifiedNumberOfPlayers = Verification.VerifySwitchCase(numberOfPlayers, 1, 2);
             string numberOfRounds = ChooseRounds(); // Choose # of rounds (best of)
-            string verifiedNumberOfRounds = Verification.VerifyPositveOddNumber(numberOfRounds);
+            string verifiedNumberOfRounds = Verification.VerifyOddNumber(numberOfRounds);
             switch (verifiedNumberOfPlayers)
             {
                 case "1": // Single player
@@ -49,7 +49,7 @@ namespace MyRPSLS
         {
             Console.Write("Type 1 for single-player (Human v Computer) or 2 for multi-player (Human v Human): "); // Choose single or multi-player, # of rounds
             string userInput = Console.ReadLine();
-            string verifiedUserInput = Verification.VerifyChoiceWithinRange(userInput, 1, 2);
+            string verifiedUserInput = Verification.VerifySwitchCase(userInput, 1, 2);
             Console.WriteLine(); // Spacing
             return verifiedUserInput;
         }
@@ -58,7 +58,7 @@ namespace MyRPSLS
         {
             Console.Write("Enter number of rounds (best of): ");
             string userInput = Console.ReadLine();
-            string verifiedUserInput = Verification.VerifyPositveOddNumber(userInput);
+            string verifiedUserInput = Verification.VerifyOddNumber(userInput);
             Console.WriteLine(); // Spacing
             return verifiedUserInput;
         }
@@ -72,7 +72,7 @@ namespace MyRPSLS
                 playerOne.DisplayGestures(); 
                 Console.Write($"{playerOne.name}, make your choice! "); // Player one chooses gesture from list
                 string playerOneChoice = Console.ReadLine(); // Capture choice as string
-                string verifiedPlayerOneChoice = Verification.VerifyChoiceWithinRange(playerOneChoice, 1, 5);
+                string verifiedPlayerOneChoice = Verification.VerifySwitchCase(playerOneChoice, 1, 5);
                 Gestures playerOneGesture = playerOne.ChooseGesture(verifiedPlayerOneChoice); // Pass string in to return Gesture object
             
                 DisplayScoreboard(); // Clears console so that player two cannot see player 1 choice
@@ -86,7 +86,7 @@ namespace MyRPSLS
                 {
                     Console.Write($"{playerTwo.name}, make your choice! "); // Player one chooses gesture from list
                     string playerTwoChoice = Console.ReadLine(); // Capture choice as string
-                    string verifiedPlayerTwoChoice = Verification.VerifyChoiceWithinRange(playerTwoChoice, 1, 5);
+                    string verifiedPlayerTwoChoice = Verification.VerifySwitchCase(playerTwoChoice, 1, 5);
                     Gestures playerTwoGesture = playerTwo.ChooseGesture(verifiedPlayerTwoChoice); // Pass string in to return Gesture object
 
                     CompareGestures(playerOneGesture, playerTwoGesture); // Compare Gestures, display round winner
@@ -237,7 +237,7 @@ namespace MyRPSLS
             winner.score++;
         }
 
-        public void EndGame()
+        public bool EndGame()
         {
             Console.Clear();
             Console.WriteLine("The game is over! Final points:\n");
@@ -250,7 +250,22 @@ namespace MyRPSLS
             {
                 Console.WriteLine($"{playerTwo.name} wins!");
             }
-            Console.ReadLine();
+            bool playAgain = Replay();
+            Console.Clear();
+            return playAgain;
+        }
+
+        public bool Replay()
+        {
+            bool playAgain = false;
+            Console.Write("\n\tType 1 to play again, 2 to quit. ");
+            string userInput = Console.ReadLine();
+            string verifiedUserInput = Verification.VerifySwitchCase(userInput, 1, 2);
+            if (verifiedUserInput == "1")
+            {
+                playAgain = true;
+            }
+            return playAgain;
         }
     }
 }
